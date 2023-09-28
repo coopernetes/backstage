@@ -23,7 +23,7 @@ import {
   sep,
 } from 'path';
 import { ConfigSchemaPackageEntry } from './types';
-import { JsonObject } from '@backstage/types';
+import mergeAllOf from 'json-schema-merge-allof';
 import { assertError } from '@backstage/errors';
 
 type Item = {
@@ -184,6 +184,7 @@ async function compileTsSchemas(paths: string[]) {
   const tsSchemas = paths.map(path => {
     let value;
     try {
+      console.time(path);
       const generator = buildGenerator(
         program,
         // This enables the use of these tags in TSDoc comments
@@ -191,32 +192,31 @@ async function compileTsSchemas(paths: string[]) {
           required: true,
           validationKeywords: ['visibility', 'deepVisibility', 'deprecated'],
           ignoreErrors: true,
-          // uniqueNames: true,
+          uniqueNames: true,
         },
         [path.split(sep).join('/')], // Unix paths are expected for all OSes here
       );
 
       // All schemas should export a `Config` symbol
-      value = generator?.getSchemaForSymbol('Config') as JsonObject | null;
+      const symbolList = generator?.getSymbols('Config');
+      const schemas = symbolList
+        ?.map(({ name }) => {
+          try {
+            return generator?.getSchemaForSymbol(name);
+          } catch (error) {
+            return undefined;
+          }
+        })
+        .filter(Boolean);
 
-      // This makes sure that no additional symbols are defined in the schema. We don't allow
-      // this because they share a global namespace and will be merged together, leading to
-      // unpredictable behavior.
-      const userSymbols = new Set(generator?.getUserSymbols());
-      userSymbols.delete('Config');
-      if (userSymbols.size !== 0) {
-        const names = Array.from(userSymbols).join("', '");
-        throw new Error(
-          `Invalid configuration schema in ${path}, additional symbol definitions are not allowed, found '${names}'`,
-        );
-      }
+      value = mergeAllOf({ allOf: schemas });
 
       // This makes sure that no unsupported types are used in the schema, for example `Record<,>`.
       // The generator will extract these as a schema reference, which will in turn be broken for our usage.
       const reffedDefs = Object.keys(generator?.ReffedDefinitions ?? {});
       if (reffedDefs.length !== 0) {
         const lines = reffedDefs.join(`${EOL}  `);
-        console.log(
+        throw new Error(
           `Invalid configuration schema in ${path}, the following definitions are not supported:${EOL}${EOL}  ${lines}`,
         );
       }
@@ -230,6 +230,9 @@ async function compileTsSchemas(paths: string[]) {
     if (!value) {
       throw new Error(`Invalid schema in ${path}, missing Config export`);
     }
+
+    console.timeEnd(path);
+
     return { path, value };
   });
 
