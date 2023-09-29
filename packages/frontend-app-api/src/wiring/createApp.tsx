@@ -328,7 +328,7 @@ export function createApp(options: {
   };
 }
 
-function toLegacyPlugin(plugin: BackstagePlugin): LegacyBackstagePlugin {
+export function toLegacyPlugin(plugin: BackstagePlugin): LegacyBackstagePlugin {
   const errorMsg = 'Not implemented in legacy plugin compatibility layer';
   const notImplemented = () => {
     throw new Error(errorMsg);
