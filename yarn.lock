@@ -3673,7 +3673,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@backstage/catalog-model@^1.1.5, @backstage/catalog-model@^1.4.1, @backstage/catalog-model@^1.4.2, @backstage/catalog-model@workspace:^, @backstage/catalog-model@workspace:packages/catalog-model":
+"@backstage/catalog-model@^1.1.5, @backstage/catalog-model@^1.4.2, @backstage/catalog-model@workspace:^, @backstage/catalog-model@workspace:packages/catalog-model":
   version: 0.0.0-use.local
   resolution: "@backstage/catalog-model@workspace:packages/catalog-model"
   dependencies:
@@ -4019,7 +4019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-components@npm:^0.13.4, @backstage/core-components@npm:^0.13.5":
+"@backstage/core-components@npm:^0.13.5":
   version: 0.13.5
   resolution: "@backstage/core-components@npm:0.13.5"
   dependencies:
@@ -4150,7 +4150,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@backstage/core-plugin-api@npm:^1.3.0, @backstage/core-plugin-api@npm:^1.5.0, @backstage/core-plugin-api@npm:^1.5.3, @backstage/core-plugin-api@npm:^1.6.0":
+"@backstage/core-plugin-api@npm:^1.3.0, @backstage/core-plugin-api@npm:^1.5.0, @backstage/core-plugin-api@npm:^1.6.0":
   version: 1.6.0
   resolution: "@backstage/core-plugin-api@npm:1.6.0"
   dependencies:
@@ -5900,7 +5900,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@backstage/plugin-catalog-react@npm:^1.2.4, @backstage/plugin-catalog-react@npm:^1.8.3, @backstage/plugin-catalog-react@npm:^1.8.4":
+"@backstage/plugin-catalog-react@npm:^1.2.4, @backstage/plugin-catalog-react@npm:^1.8.4":
   version: 1.8.4
   resolution: "@backstage/plugin-catalog-react@npm:1.8.4"
   dependencies:
@@ -10073,7 +10073,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@backstage/theme@^0.4.1, @backstage/theme@^0.4.2, @backstage/theme@workspace:^, @backstage/theme@workspace:packages/theme":
+"@backstage/theme@^0.4.2, @backstage/theme@workspace:^, @backstage/theme@workspace:packages/theme":
   version: 0.0.0-use.local
   resolution: "@backstage/theme@workspace:packages/theme"
   dependencies:
@@ -20244,13 +20244,13 @@ __metadata:
   linkType: hard
 
 "axios@npm:^1.4.0":
-  version: 1.5.0
-  resolution: "axios@npm:1.5.0"
+  version: 1.5.1
+  resolution: "axios@npm:1.5.1"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: e7405a5dbbea97760d0e6cd58fecba311b0401ddb4a8efbc4108f5537da9b3f278bde566deb777935a960beec4fa18e7b8353881f2f465e4f2c0e949fead35be
+  checksum: 4444f06601f4ede154183767863d2b8e472b4a6bfc5253597ed6d21899887e1fd0ee2b3de792ac4f8459fe2e359d2aa07c216e45fd8b9e4e0688a6ebf48a5a8d
   languageName: node
   linkType: hard
 
