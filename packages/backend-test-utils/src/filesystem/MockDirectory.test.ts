@@ -261,7 +261,11 @@ describe('createMockDirectory', () => {
   });
 
   it('should reject non-child paths', () => {
-    const path = resolvePath('/root/a.txt');
+    const path = resolvePath(
+      os.platform() === 'win32' ? 'C:\\' : '/',
+      'root',
+      'a.txt',
+    );
     expect(() => mockDir.setContent({ '/root/a.txt': 'a' })).toThrow(
       `Provided path must resolve to a child path of the mock directory, got '${path}'`,
     );
